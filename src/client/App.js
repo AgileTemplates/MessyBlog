@@ -7,18 +7,12 @@ const App = () => {
   const [formitem1, setFormitem1] = useState('');
   const [objects, setObjects] = useState([]);
   const [formitem2, setFormitem2] = useState('');
-  const [formitem3, setFormitem3] = useState('');
-  const [formitem4, setFormitem4] = useState('');
-  let totalItems;
-  let currentUser;
-  console.log(formitem2);
 
   useEffect(() => getPosts(), []);
   async function getPosts() {
     try {
       const res = await fetch(`${API}/get-posts`);
       const resAsJSON = await res.json();
-      console.log(resAsJSON.data.data);
       const objects = resAsJSON.data.data[0].rows;
       setObjects(objects);
     } catch (error) {
@@ -26,18 +20,8 @@ const App = () => {
     }
   }
 
-  // async function getPosts() {
-  //   try {
-  //     const res = await fetch(`${API}/get-posts`);
-  //     setObjects(res);
-  //   } catch (error) {
-  //     setError(error);
-  //   }
-  // }
-
   async function addOrDeletePost({ addOrDelete, id, formitem1, formitem2 }) {
     if (addOrDelete === 'add' && (!formitem1 || !formitem2)) return;
-    console.log(addOrDelete);
     const body =
       addOrDelete === 'add'
         ? JSON.stringify({
@@ -67,10 +51,6 @@ const App = () => {
             value={formitem2}
             onChange={(e) => setFormitem2(e.target.value)}
           />
-          {/* <textarea
-            placeholder={'Author'}
-            value={formitem4}
-          /> */}
           <button
             onClick={() =>
               addOrDeletePost({ addOrDelete: 'add', formitem1, formitem2 })
@@ -82,14 +62,11 @@ const App = () => {
             onClick={(e) => {
               e.preventDefault();
               try {
-                console.log('clicked');
                 formitem1 = '';
                 formitem2 = '';
-                setFormitem3('');
               } catch (error) {
                 console.log(error);
               }
-              // setFormitem4('');
             }}
           >
             Clear
@@ -118,25 +95,6 @@ const App = () => {
               </button>
             </div>
           ))}
-
-          {/* <div style={{ marginBottom: 24 }}>
-              <hr />
-              <div>
-                <h3>{post.title}</h3>
-                <div>{JSON.stringify(post.date)}</div>
-                <p>{post.content}</p>
-              </div>
-              <button
-                onClick={() =>
-                  addOrDeletePost({
-                    addOrDelete: 'delete',
-                    id: post.id,
-                  })
-                }
-              >
-                delete
-              </button>
-            </div> */}
         </div>
         <hr />
       </>
