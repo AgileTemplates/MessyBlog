@@ -45,6 +45,13 @@ const App = () => {
     return getPosts();
   }
 
+  // When the user clicks 'Clear', set both of the form item values to empty
+  const clearForm = (e) => {
+    e.preventDefault();
+    setFormitem1('');
+    setFormitem2('');
+  };
+
   return (
     <div style={{ width: 800 }}>
       {error && <p>Error: {error.message}</p>}
@@ -74,17 +81,7 @@ const App = () => {
           >
             Post
           </button>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              formitem1 = '';
-              formitem2 = '';
-              setFormitem3('');
-              // setFormitem4('');
-            }}
-          >
-            Clear
-          </button>
+          <button onClick={clearForm}>Clear</button>
           <hr />
           <hr />
         </form>
