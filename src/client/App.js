@@ -81,10 +81,14 @@ const App = () => {
           <button
             onClick={(e) => {
               e.preventDefault();
-              console.log('clicked');
-              formitem1 = '';
-              formitem2 = '';
-              setFormitem3('');
+              try {
+                console.log('clicked');
+                formitem1 = '';
+                formitem2 = '';
+                setFormitem3('');
+              } catch (error) {
+                console.log(error);
+              }
               // setFormitem4('');
             }}
           >
