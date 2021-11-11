@@ -77,8 +77,8 @@ const App = () => {
           <button
             onClick={(e) => {
               e.preventDefault();
-              setFormitem1('');
-              setFormitem2('');
+              formitem1 = '';
+              formitem2 = '';
               setFormitem3('');
               // setFormitem4('');
             }}
