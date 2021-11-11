@@ -7,7 +7,7 @@ const App = () => {
   const [formitem1, setFormitem1] = useState('');
   const [objects, setObjects] = useState([]);
   const [formitem2, setFormitem2] = useState('');
-  const [formitem3, setFormitem3] = useState('');
+  const [setFormitem3] = useState('');
   console.log(formitem2);
 
   useEffect(() => getPosts(), []);
@@ -22,15 +22,6 @@ const App = () => {
       setError(error);
     }
   }
-
-  // async function getPosts() {
-  //   try {
-  //     const res = await fetch(`${API}/get-posts`);
-  //     setObjects(res);
-  //   } catch (error) {
-  //     setError(error);
-  //   }
-  // }
 
   async function addOrDeletePost({ addOrDelete, id, formitem1, formitem2 }) {
     if (addOrDelete === 'add' && (!formitem1 || !formitem2)) return;
@@ -63,10 +54,6 @@ const App = () => {
             value={formitem2}
             onChange={(e) => setFormitem2(e.target.value)}
           />
-          {/* <textarea
-            placeholder={'Author'}
-            value={formitem4}
-          /> */}
           <button
             onClick={() =>
               addOrDeletePost({ addOrDelete: 'add', formitem1, formitem2 })
@@ -80,7 +67,6 @@ const App = () => {
               formitem1 = '';
               formitem2 = '';
               setFormitem3('');
-              // setFormitem4('');
             }}
           >
             Clear
