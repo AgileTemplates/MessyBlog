@@ -13,7 +13,6 @@ const App = () => {
     try {
       const res = await fetch(`${API}/get-posts`);
       const resAsJSON = await res.json();
-      console.log(resAsJSON.data.data);
       const objects = resAsJSON.data.data[0].rows;
       setObjects(objects);
     } catch (error) {
@@ -23,7 +22,6 @@ const App = () => {
 
   async function addOrDeletePost({ addOrDelete, id, formitem1, formitem2 }) {
     if (addOrDelete === 'add' && (!formitem1 || !formitem2)) return;
-    console.log(addOrDelete);
     const body =
       addOrDelete === 'add'
         ? JSON.stringify({
@@ -63,8 +61,12 @@ const App = () => {
           <button
             onClick={(e) => {
               e.preventDefault();
-              formitem1 = '';
-              formitem2 = '';
+              try {
+                formitem1 = '';
+                formitem2 = '';
+              } catch (error) {
+                console.log(error);
+              }
             }}
           >
             Clear
