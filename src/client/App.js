@@ -7,8 +7,6 @@ const App = () => {
   const [formitem1, setFormitem1] = useState('');
   const [objects, setObjects] = useState([]);
   const [formitem2, setFormitem2] = useState('');
-  const [setFormitem3] = useState('');
-  console.log(formitem2);
 
   useEffect(() => getPosts(), []);
   async function getPosts() {
@@ -25,6 +23,7 @@ const App = () => {
 
   async function addOrDeletePost({ addOrDelete, id, formitem1, formitem2 }) {
     if (addOrDelete === 'add' && (!formitem1 || !formitem2)) return;
+    console.log(addOrDelete);
     const body =
       addOrDelete === 'add'
         ? JSON.stringify({
@@ -66,7 +65,6 @@ const App = () => {
               e.preventDefault();
               formitem1 = '';
               formitem2 = '';
-              setFormitem3('');
             }}
           >
             Clear
@@ -95,25 +93,6 @@ const App = () => {
               </button>
             </div>
           ))}
-
-          {/* <div style={{ marginBottom: 24 }}>
-              <hr />
-              <div>
-                <h3>{post.title}</h3>
-                <div>{JSON.stringify(post.date)}</div>
-                <p>{post.content}</p>
-              </div>
-              <button
-                onClick={() =>
-                  addOrDeletePost({
-                    addOrDelete: 'delete',
-                    id: post.id,
-                  })
-                }
-              >
-                delete
-              </button>
-            </div> */}
         </div>
         <hr />
       </>
