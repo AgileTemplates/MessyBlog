@@ -8,6 +8,9 @@ const App = () => {
   const [objects, setObjects] = useState([]);
   const [formitem2, setFormitem2] = useState('');
   const [formitem3, setFormitem3] = useState('');
+  const [formitem4, setFormitem4] = useState('');
+  let totalItems;
+  let currentUser;
   console.log(formitem2);
 
   useEffect(() => getPosts(), []);
@@ -34,6 +37,7 @@ const App = () => {
 
   async function addOrDeletePost({ addOrDelete, id, formitem1, formitem2 }) {
     if (addOrDelete === 'add' && (!formitem1 || !formitem2)) return;
+    console.log(addOrDelete);
     const body =
       addOrDelete === 'add'
         ? JSON.stringify({
@@ -77,6 +81,7 @@ const App = () => {
           <button
             onClick={(e) => {
               e.preventDefault();
+              console.log('clicked');
               formitem1 = '';
               formitem2 = '';
               setFormitem3('');
