@@ -35,17 +35,16 @@ const App = () => {
   //   }
   // }
 
-  async function addOrDeletePost({ addOrDelete, id, formitem1, formitem2 }) {
-    if (addOrDelete === 'add' && (!formitem1 || !formitem2)) return;
-    console.log(addOrDelete);
-    const body =
-      addOrDelete === 'add'
-        ? JSON.stringify({
-            title: formitem1,
-            content: formitem2,
-          })
-        : JSON.stringify({ id });
-    await fetch(`${API}/${addOrDelete}-post`, { method: 'POST', body });
+  async function addPost({ formitem1, formitem2 }) {
+    if (!formitem1 || !formitem2) return;
+    const body = JSON.stringify({ title: formitem1, content: formitem2 });
+    await fetch(`${API}/add-post`, { method: 'POST', body });
+    return getPosts();
+  }
+
+  async function deletePost({ id }) {
+    const body = JSON.stringify({ id });
+    await fetch(`${API}/delete-post`, { method: 'POST', body });
     return getPosts();
   }
 
@@ -71,11 +70,7 @@ const App = () => {
             placeholder={'Author'}
             value={formitem4}
           /> */}
-          <button
-            onClick={() =>
-              addOrDeletePost({ addOrDelete: 'add', formitem1, formitem2 })
-            }
-          >
+          <button onClick={() => addPost({ formitem1, formitem2 })}>
             Post
           </button>
           <button
@@ -106,14 +101,7 @@ const App = () => {
                 <TimeAgo date={post.date} />
                 <p>{post.content}</p>
               </div>
-              <button
-                onClick={() =>
-                  addOrDeletePost({
-                    addOrDelete: 'delete',
-                    id: post,
-                  })
-                }
-              >
+              <button onClick={() => deletePost({ id: post.id })}>
                 delete
               </button>
             </div>
