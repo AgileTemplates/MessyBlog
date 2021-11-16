@@ -110,7 +110,7 @@ const App = () => {
                 onClick={() =>
                   addOrDeletePost({
                     addOrDelete: 'delete',
-                    id: post,
+                    id: post.id,
                   })
                 }
               >
